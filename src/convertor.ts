@@ -211,8 +211,10 @@ export class PrismaConvertor {
 		/** relation & enums */
 		const relationTypes = uniquify(
 			model.fields
-				.filter(
-					(field) => field.relationName && model.name !== field.type,
+				.filter((field) =>
+					extractRelationFields
+						? field.relationName
+						: field.relationName && model.name !== field.type,
 				)
 				.map((v) => v.type),
 		)
